@@ -1,3 +1,5 @@
+using System;
+
 namespace PlanYourHeist
 {
     public class HeistReport
@@ -9,5 +11,15 @@ namespace PlanYourHeist
         }
         public int SuccessCount { get; set; }
         public int FailureCount { get; set; }
+
+        public void Print()
+        {
+            Console.WriteLine();
+            Console.WriteLine("-------");
+            Console.WriteLine("REPORT");
+            Console.WriteLine("-------");
+            Console.WriteLine($"Successes: {SuccessCount}");
+            Console.WriteLine($"Failures: {FailureCount}");
+        }
     }
 }

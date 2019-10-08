@@ -76,14 +76,9 @@ namespace PlanYourHeist
                     Console.WriteLine("Failure...");
                     report.FailureCount++;
                 }
-            }
 
-            Console.WriteLine();
-            Console.WriteLine("-------");
-            Console.WriteLine("REPORT");
-            Console.WriteLine("-------");
-            Console.WriteLine($"Successes: {report.SuccessCount}");
-            Console.WriteLine($"Failures: {report.FailureCount}");
+                report.Print();
+            }
         }
     }
 }
