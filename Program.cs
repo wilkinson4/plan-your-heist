@@ -9,9 +9,9 @@ namespace PlanYourHeist
         {
             Console.WriteLine("Plan Your Heist!");
 
-            List<Dictionary<string, string>> team = new List<Dictionary<string, string>>();
+            List<TeamMember> team = new List<TeamMember>();
 
-            
+
             Console.WriteLine("Bank Difficulty> ");
             int bankDifficulty = int.Parse(Console.ReadLine());
 
@@ -27,11 +27,11 @@ namespace PlanYourHeist
                 Console.WriteLine("Courage Factor> ");
                 string courageFactor = Console.ReadLine();
 
-                Dictionary<string, string> member = new Dictionary<string, string>() {
-                    {"Name", name},
-                    { "SkillLevel", skillLevel},
-                    { "CourageFactor", courageFactor}
-                };
+                TeamMember member = new TeamMember();
+
+                member.Name = name;
+                member.SkillLevel = int.Parse(skillLevel);
+                member.CourageFactor = double.Parse(courageFactor);
                 team.Add(member);
 
                 Console.WriteLine();
@@ -46,16 +46,14 @@ namespace PlanYourHeist
 
 
             int teamSkill = 0;
-            foreach (Dictionary<string, string> member in team)
+            foreach (TeamMember member in team)
             {
-                teamSkill += int.Parse(member["SkillLevel"]);
+                teamSkill += member.SkillLevel;
             }
 
 
-            Dictionary<string, int> report = new Dictionary<string, int>(){
-                {"Successes", 0},
-                {"Failures", 0}
-            };
+
+            HeistReport report = new HeistReport();
 
             for (int i = 0; i < trialRunCount; i++)
             {
@@ -71,12 +69,12 @@ namespace PlanYourHeist
                 if (teamSkill >= trialRunBankDifficulty)
                 {
                     Console.WriteLine("YOU RICH!");
-                    report["Successes"]++;
+                    report.SuccessCount++;
                 }
                 else
                 {
                     Console.WriteLine("Failure...");
-                    report["Failures"]++;
+                    report.FailureCount++;
                 }
             }
 
@@ -84,8 +82,8 @@ namespace PlanYourHeist
             Console.WriteLine("-------");
             Console.WriteLine("REPORT");
             Console.WriteLine("-------");
-            Console.WriteLine($"Successes: {report["Successes"]}");
-            Console.WriteLine($"Failures: {report["Failures"]}");
+            Console.WriteLine($"Successes: {report.SuccessCount}");
+            Console.WriteLine($"Failures: {report.FailureCount}");
         }
     }
 }
